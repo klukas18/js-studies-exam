@@ -2,10 +2,11 @@
 
 This is a simple web-app made with HTML, CSS, JS and GSAP. This app was created as a final examination of postgraduate level JavaScript Studies.
 <br>
+You can check the live version here:
 
 ![screenshot](./intro.png)
 
-You can play 3 simple games:
+You can play 3 simple games: https://klukas18.github.io/js-studies-exam/
 
 # 1. SudokuSolver
 
