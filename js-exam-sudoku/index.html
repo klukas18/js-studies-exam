@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Sudoku Solver</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./sudoku-solver.css" />
+	</head>
+
+	<body>
+		<section class="intro-section">
+			<div class="progress"></div>
+			<p class="logotype">SudokuSolver</p>
+
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+				integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+				crossorigin="anonymous"
+				referrerpolicy="no-referrer"
+			></script>
+			<script>
+				gsap.to('.progress', {
+					duration: 1,
+					width: '100%',
+					ease: 'power1.inOut',
+					delay: 0.5,
+				});
+
+				gsap.from('.logotype', {
+					y: -200,
+					duration: 2,
+					ease: 'elastic.out(1, 0.5)',
+				});
+
+				gsap.to('.progress', {
+					duration: 1,
+					height: '100%',
+					top: 0,
+					backgroundColor: 'white',
+					width: '100%',
+					ease: 'power1.inOut',
+					delay: 2.5,
+					onComplete: function () {
+						document.querySelector('.intro-section').style.display = 'none';
+
+						setTimeout(function () {
+							document.getElementById('sudoku-board').style.display = 'flex';
+
+							gsap.from('#sudoku-board', {
+								duration: 1,
+								opacity: 0,
+								y: 50,
+								ease: 'power2.inOut',
+							});
+						}, 200);
+					},
+				});
+			</script>
+		</section>
+
+		<section class="sudoku-section">
+			<div class="body-container">
+				<form id="sudoku-board" class="sudoku-board">
+					<h1>Sudoku Solver</h1>
+					<h2>Rules:</h2>
+					<p>1. You can only pass into cells numbers from 1 to 9.</p>
+					<p>2. Numbers in the same row/column & block CAN'T repeat.</p>
+					<p>3. If you try to enter illegal values the alert will pop up.</p>
+					<div class="grid">
+						<input
+							id="cell-0-0"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-1"
+						/>
+						<input
+							id="cell-0-1"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-1"
+						/>
+						<input
+							id="cell-0-2"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-1"
+						/>
+						<input
+							id="cell-0-3"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-2"
+						/>
+						<input
+							id="cell-0-4"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-2"
+						/>
+						<input
+							id="cell-0-5"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-2"
+						/>
+						<input
+							id="cell-0-6"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-3"
+						/>
+						<input
+							id="cell-0-7"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-3"
+						/>
+						<input
+							id="cell-0-8"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-3"
+						/>
+						<input
+							id="cell-1-0"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-1"
+						/>
+						<input
+							id="cell-1-1"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-1"
+						/>
+						<input
+							id="cell-1-2"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-1"
+						/>
+						<input
+							id="cell-1-3"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-2"
+						/>
+						<input
+							id="cell-1-4"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-2"
+						/>
+						<input
+							id="cell-1-5"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-2"
+						/>
+						<input
+							id="cell-1-6"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-3"
+						/>
+						<input
+							id="cell-1-7"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-3"
+						/>
+						<input
+							id="cell-1-8"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-3"
+						/>
+						<input
+							id="cell-2-0"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-1"
+						/>
+						<input
+							id="cell-2-1"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-1"
+						/>
+						<input
+							id="cell-2-2"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-1"
+						/>
+						<input
+							id="cell-2-3"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-2"
+						/>
+						<input
+							id="cell-2-4"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-2"
+						/>
+						<input
+							id="cell-2-5"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-2"
+						/>
+						<input
+							id="cell-2-6"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-3"
+						/>
+						<input
+							id="cell-2-7"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-3"
+						/>
+						<input
+							id="cell-2-8"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-3"
+						/>
+						<input
+							id="cell-3-0"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-4"
+						/>
+						<input
+							id="cell-3-1"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-4"
+						/>
+						<input
+							id="cell-3-2"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-4"
+						/>
+						<input
+							id="cell-3-3"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-5"
+						/>
+						<input
+							id="cell-3-4"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-5"
+						/>
+						<input
+							id="cell-3-5"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-5"
+						/>
+						<input
+							id="cell-3-6"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-6"
+						/>
+						<input
+							id="cell-3-7"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-6"
+						/>
+						<input
+							id="cell-3-8"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-6"
+						/>
+						<input
+							id="cell-4-0"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-4"
+						/>
+						<input
+							id="cell-4-1"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-4"
+						/>
+						<input
+							id="cell-4-2"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-4"
+						/>
+						<input
+							id="cell-4-3"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-5"
+						/>
+						<input
+							id="cell-4-4"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-5"
+						/>
+						<input
+							id="cell-4-5"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-5"
+						/>
+						<input
+							id="cell-4-6"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-6"
+						/>
+						<input
+							id="cell-4-7"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-6"
+						/>
+						<input
+							id="cell-4-8"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-6"
+						/>
+						<input
+							id="cell-5-0"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-4"
+						/>
+						<input
+							id="cell-5-1"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-4"
+						/>
+						<input
+							id="cell-5-2"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-4"
+						/>
+						<input
+							id="cell-5-3"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-5"
+						/>
+						<input
+							id="cell-5-4"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-5"
+						/>
+						<input
+							id="cell-5-5"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-5"
+						/>
+						<input
+							id="cell-5-6"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-6"
+						/>
+						<input
+							id="cell-5-7"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-6"
+						/>
+						<input
+							id="cell-5-8"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-6"
+						/>
+						<input
+							id="cell-6-0"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-7"
+						/>
+						<input
+							id="cell-6-1"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-7"
+						/>
+						<input
+							id="cell-6-2"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-7"
+						/>
+						<input
+							id="cell-6-3"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-8"
+						/>
+						<input
+							id="cell-6-4"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-8"
+						/>
+						<input
+							id="cell-6-5"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-8"
+						/>
+						<input
+							id="cell-6-6"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-9"
+						/>
+						<input
+							id="cell-6-7"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-9"
+						/>
+						<input
+							id="cell-6-8"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-9"
+						/>
+						<input
+							id="cell-7-0"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-7"
+						/>
+						<input
+							id="cell-7-1"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-7"
+						/>
+						<input
+							id="cell-7-2"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-7"
+						/>
+						<input
+							id="cell-7-3"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-8"
+						/>
+						<input
+							id="cell-7-4"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-8"
+						/>
+						<input
+							id="cell-7-5"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-8"
+						/>
+						<input
+							id="cell-7-6"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-9"
+						/>
+						<input
+							id="cell-7-7"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-9"
+						/>
+						<input
+							id="cell-7-8"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-9"
+						/>
+						<input
+							id="cell-8-0"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-7"
+						/>
+						<input
+							id="cell-8-1"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-7"
+						/>
+						<input
+							id="cell-8-2"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-7"
+						/>
+						<input
+							id="cell-8-3"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-8"
+						/>
+						<input
+							id="cell-8-4"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-8"
+						/>
+						<input
+							id="cell-8-5"
+							type="number"
+							min="1"
+							max="9"
+							class="cell block-8"
+						/>
+						<input
+							id="cell-8-6"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-9"
+						/>
+						<input
+							id="cell-8-7"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-9"
+						/>
+						<input
+							id="cell-8-8"
+							type="number"
+							min="1"
+							max="9"
+							class="cell dark-bg block-9"
+						/>
+					</div>
+					<p>
+						For more information about how this works
+						<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;please check this
+						wikipedia<a
+							href="https://en.wikipedia.org/wiki/Sudoku_solving_algorithms"
+							class="href"
+							target="_blank"
+							>&nbsp;page</a
+						>.
+					</p>
+					<div>
+						<button type="button" id="quick-solve-button">Quick Solve</button>
+						<button type="button" id="cool-solve-button">Cool Solve</button>
+						<button type="button" id="clear-button" class="clear-button">
+							Clear
+						</button>
+					</div>
+				</form>
+			</div>
+		</section>
+		<script src="./sudoku-solver.js"></script>
+	</body>
+</html>

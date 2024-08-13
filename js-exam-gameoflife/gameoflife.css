@@ -1,0 +1,163 @@
+@font-face {
+	font-family: 'Back to 1982';
+	src: url(./fonts/back-to-1982.regular.ttf);
+}
+@font-face {
+	font-family: 'Public Pixel';
+	src: url(./fonts/PublicPixel-z84yD.ttf);
+}
+@font-face {
+	font-family: 'LCD Phone';
+	src: url(./fonts/LcdPhone-wgZ2.ttf);
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.intro-section {
+	height: 100vh;
+	width: 100%;
+	background-color: #5bb450;
+}
+.logotype {
+	font-family: 'Inter', sans-serif;
+	font-size: 8rem;
+	text-align: center;
+	color: white;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.progress {
+	background-color: #becfbb;
+	height: 3px;
+	width: 0;
+	position: absolute;
+	top: 50%;
+	left: 0;
+}
+
+.game-section {
+	height: 100vh;
+	width: 100vw;
+	background-color: #cfcfcf;
+}
+.container {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background-color: #cfcfcf;
+}
+.game-board {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: 100%;
+	height: 100vh;
+	background-color: #cfcfcf;
+}
+
+canvas {
+	background-color: #ffffff;
+	border: 1px solid #000;
+	border-radius: 20px;
+}
+h1 {
+	width: 1000px;
+	font-family: 'Back to 1982', sans-serif;
+	font-size: 50px;
+	margin: 20px 0;
+	background-color: #b7b7b7;
+	border-radius: 20px;
+}
+.controls {
+	width: 1000px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	font-family: 'Public Pixel';
+	gap: 20px;
+	padding: 20px;
+	margin: 20px 0;
+	background-color: #b7b7b7;
+	border-radius: 20px;
+}
+.buttons {
+	display: flex;
+	justify-content: space-around;
+	gap: 5px;
+}
+.buttons button {
+	width: 100%;
+	padding: 10px 20px;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	font-family: 'Public Pixel';
+}
+
+#startButton {
+	background-color: #4caf50;
+	color: white;
+}
+#startButton:hover {
+	background-color: #298c2c;
+}
+
+#pauseButton {
+	background-color: #f44336;
+	color: white;
+}
+#pauseButton:hover {
+	background-color: #c52a1f;
+}
+
+#randomButton {
+	background-color: #008cba;
+	color: white;
+}
+#randomButton:hover {
+	background-color: #016a8d;
+}
+
+#clearButton {
+	background-color: #e91e63;
+	color: white;
+}
+#clearButton:hover {
+	background-color: #b60e46;
+}
+
+.selects {
+	display: flex;
+	justify-content: space-around;
+	gap: 10px;
+}
+
+#colorScheme {
+	font-family: 'Public Pixel';
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f8f8f8;
+	color: #333;
+	font-size: 12px;
+}

@@ -1,0 +1,133 @@
+@font-face {
+	font-family: 'Back to 1982';
+	src: url(./fonts/back-to-1982.regular.ttf);
+}
+@font-face {
+	font-family: 'Public Pixel';
+	src: url(./fonts/PublicPixel-z84yD.ttf);
+}
+@font-face {
+	font-family: 'LCD Phone';
+	src: url(./fonts/LcdPhone-wgZ2.ttf);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+}
+
+.intro-section {
+	height: 100vh;
+	position: relative;
+}
+
+video {
+	width: 100%;
+	position: absolute;
+	z-index: -1;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+svg {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+
+	mask {
+		display: grid;
+		place-content: center;
+		height: 100vh;
+	}
+
+	text {
+		font-family: 'Poppins', sans-serif;
+		font-weight: 900;
+		text-transform: uppercase;
+		font-size: 1vw;
+		letter-spacing: -0.15rem;
+		transform: translate(30%, 55%);
+	}
+
+	rect {
+		fill: white;
+		mask: url(#mask);
+	}
+}
+
+.bouncing-arrow {
+	display: block;
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+	0%,
+	20%,
+	50%,
+	80%,
+	100% {
+		transform: translateY(0);
+	}
+	40% {
+		transform: translateY(-30px);
+	}
+	60% {
+		transform: translateY(-15px);
+	}
+}
+
+.main-section {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.part1,
+.part2,
+.part3 {
+	width: 100%;
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.part1 {
+	background-color: #2865ff;
+}
+.part2 {
+	background-color: #ff9d5c;
+}
+.part3 {
+	background-color: #5bb450;
+}
+a {
+	padding: 10px 20px;
+	height: 30%;
+	width: 1000px;
+	border: none;
+	border-radius: 15px;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+	font-family: 'Back to 1982';
+	font-size: 3rem;
+}
+a:hover {
+	background-color: rgba(0, 0, 0, 0.7);
+}

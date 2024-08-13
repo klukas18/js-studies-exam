@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Game of Life</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./gameoflife.css" />
+	</head>
+	<body>
+		<section class="intro-section">
+			<div class="progress"></div>
+			<p class="logotype">Game of Life</p>
+
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+				integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+				crossorigin="anonymous"
+				referrerpolicy="no-referrer"
+			></script>
+			<script>
+				gsap.to('.progress', {
+					duration: 1,
+					width: '100%',
+					ease: 'power1.inOut',
+					delay: 0.5,
+				});
+
+				gsap.from('.logotype', {
+					y: -200,
+					duration: 2,
+					ease: 'elastic.out(1, 0.5)',
+				});
+
+				gsap.to('.progress', {
+					duration: 1,
+					height: '100%',
+					top: 0,
+					backgroundColor: 'white',
+					width: '100%',
+					ease: 'power1.inOut',
+					delay: 2.5,
+					onComplete: function () {
+						document.querySelector('.intro-section').style.display = 'none';
+
+						setTimeout(function () {
+							document.getElementById('container').style.display = 'flex';
+
+							gsap.from('#game-board', {
+								duration: 1,
+								opacity: 0,
+								y: 50,
+								ease: 'power2.inOut',
+							});
+						}, 200);
+					},
+				});
+			</script>
+		</section>
+
+		<section class="game-section">
+			<div class="container" id="container">
+				<div class="game-board" id="game-board">
+					<h1>Game of Life</h1>
+					<canvas id="gameOfLife" width="1000" height="600"></canvas>
+					<div class="controls">
+						<div class="buttons">
+							<button id="startButton">Start</button>
+							<button id="pauseButton">Pause</button>
+							<button id="clearButton">Clear</button>
+							<button id="randomButton">Randomize</button>
+						</div>
+						<div class="selects">
+							<label for="cellSize">Cell Size:</label>
+							<input type="range" id="cellSize" min="3" max="9" value="6" />
+							<label for="gameSpeed">Game Speed:</label>
+							<input type="range" id="gameSpeed" min="0" max="10" value="5" />
+							<label for="colorScheme">Color Scheme:</label>
+							<select id="colorScheme">
+								<option value="default">Default</option>
+								<option value="reversed">Reversed</option>
+								<option value="rainbow">Rainbow</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<script src="gameOfLife.js"></script>
+	</body>
+</html>

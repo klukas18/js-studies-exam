@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>JavaScript Exam</title>
+		<link rel="stylesheet" href="./styles.css" />
+	</head>
+	<body>
+		<section class="intro-section">
+			<video
+				autoplay
+				playsinline
+				muted
+				loop
+				preload
+				poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/oceanshot.jpg"
+			>
+				<source src="./12920674-hd_1920_1080_30fps.mp4" />
+			</video>
+
+			<svg viewBox="0 0 285 80" preserveAspectRatio="xMidYMid slice">
+				<defs>
+					<mask id="mask" x="0" y="0" width="100%" height="100%">
+						<rect x="0" y="0" width="100%" height="100%" />
+						<text>JavaScript</text>
+					</mask>
+				</defs>
+
+				<rect x="0" y="0" width="100%" height="100%" />
+			</svg>
+			<div class="bouncing-arrow">
+				<img src="/down-arrow.png" alt="Arrow pointing down">
+			</div>
+		</section>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+			integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+			integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+		<script>
+			const video = document.querySelector('video');
+			if (window.matchMedia('(prefers-reduced-motion)').matches) {
+				video.removeAttribute('autoplay');
+				video.pause();
+			}
+
+			gsap.from('text', {
+				scrollTrigger: {
+					trigger: 'section',
+					start: 'top center',
+					end: 'bottom 20%',
+					scrub: 2,
+				},
+				scale: 0.5,
+				opacity: 0,
+				transformOrigin: 'center',
+				duration: 2,
+				ease: 'power4.out',
+			});
+
+			// smooth scroll
+
+			const lenis = new Lenis();
+
+			function raf(time) {
+				lenis.raf(time);
+				requestAnimationFrame(raf);
+			}
+
+			requestAnimationFrame(raf);
+		</script>
+
+		<section class="main-section">
+			<div class="part1">
+				<a href="./js-exam-sudoku/index.html"> Sudoku Solver </a>
+			</div>
+			<div class="part2">
+				<a href="./js-exam-bouncy/index.html"> Bouncy Ball </a>
+			</div>
+			<div class="part3">
+				<a href="./js-exam-gameoflife/index.html"> Game Of Life </a>
+			</div>
+		</section>
+
+		<script src="./script.js"></script>
+	</body>
+</html>
